@@ -38,13 +38,16 @@ function getUpdatedPolutionValue() {
 }
 
 function spawnPoo() {
-    x = map.worldToTileX((Math.floor(Math.random()*800)));
-    y = map.worldToTileX((Math.floor(Math.random()*600)));
-    map.fill(47, x, y, 1, 1);
-    poos.push({
-        x: x,
-        y: y
-    })
+        x = map.worldToTileX((Math.floor(Math.random()*800)));
+        y = map.worldToTileY((Math.floor(Math.random()*600)));
+        var tile = map.getTileAt(x,y);
+        console.log(tile)
+        if (tile.index === 30) {
+            map.fill(47, x, y, 1, 1);
+            poos.push({
+                x: x,
+                y: y
+    })}
 }
 
 function verifyLevelGoal() {
