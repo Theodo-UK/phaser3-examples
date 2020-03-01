@@ -23,13 +23,13 @@ var POLLUTION_TICKER = 1000
 var trees = []
 var poos = []
 var gameLevel = 1;
-var lvlGoal = [-100, -200, -300]
+var lvlGoal = [-100, -350, -1000, -3000]
 
 function getUpdatedPolutionValue() {
     // Get absorbed polution from trees
     var treePolutionAbsorbed = trees.length;
     // Get produced polution from poo
-    var pooPolutionProduced = poos.length;
+    var pooPolutionProduced = poos.length*gameLevel;
 
     var pollutionUpdate = pooPolutionProduced - treePolutionAbsorbed;
 
@@ -60,6 +60,12 @@ function updatePoo() {
 
 
 function verifyLevelGoal() {
+    if (gameLevel === 5){
+        return endOfGameStatus.setText('You Won!!!')
+    }
+    if (pollutionValue > 50){
+        return endOfGameStatus.setText('You Lost!!!')
+    }
     if (pollutionValue <= lvlGoal[gameLevel-1]) {
         gameLevel++;
         levelStatus.setText('Game level: ' + gameLevel + ' Pollution lvl goal: ' + lvlGoal[gameLevel-1]);
@@ -110,10 +116,17 @@ function create ()
         backgroundColor: 'rgba(0,0,0,0.3)',
         fill: '#ffffff'
     });
+    endOfGameStatus = this.add.text(200, 200, undefined, {
+        fontFamily: 'Arial',
+        fontSize: '80px',
+        padding: { x: 10, y: 5 },
+        backgroundColor: 'transparent',
+        fill: 'darkBlue'
+    });
     pollutionStatus.setScrollFactor(0);
     setInterval(getUpdatedPolutionValue, 1000);
     setInterval(verifyLevelGoal, 1000);
-    setInterval(spawnPoo, 1000);
+    setInterval(spawnPoo, 500);
     setInterval(updatePoo, 1000);
 }
 
