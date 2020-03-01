@@ -37,7 +37,7 @@ function getUpdatedPolutionValue() {
 
 function preload ()
 {
-    this.load.image('tiles', 'assets/tilemaps/tiles/tmw_desert_spacing.png');
+    this.load.image('tiles', 'assets/tilemaps/tiles/map5.png');
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/maps/desert.json');
 }
 
