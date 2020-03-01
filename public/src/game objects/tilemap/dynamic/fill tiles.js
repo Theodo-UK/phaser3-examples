@@ -22,6 +22,8 @@ var POLLUTION_TICKER = 1000
 
 var trees = []
 var poos = []
+var gameLevel = 1;
+var lvlGoal = [-100, -200, -300]
 
 function getUpdatedPolutionValue() {
     // Get absorbed polution from trees
@@ -40,6 +42,14 @@ function spawnPoo() {
     y = map.worldToTileX((Math.floor(Math.random()*600)));
     console.log(x, y);
     map.fill(47, x, y, 1, 1);
+}
+
+function verifyLevelGoal() {
+    if (pollutionValue <= lvlGoal[gameLevel-1]) {
+        gameLevel++;
+        levelStatus.setText('Game level: ' + gameLevel + ' Pollution lvl goal: ' + lvlGoal[gameLevel-1]);
+        
+    }
 }
 
 function preload ()
@@ -71,15 +81,23 @@ function create ()
     };
     controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
-    pollutionStatus = this.add.text(16, 16, 'Polution level: ' + pollutionValue, {
+    pollutionStatus = this.add.text(16, 64, 'Polution level: ' + pollutionValue, {
         fontFamily: 'Arial',
         fontSize: '18px',
         padding: { x: 10, y: 5 },
         backgroundColor: 'rgba(0,0,0,0.3)',
         fill: '#ff0000'
     });
+    levelStatus = this.add.text(16, 16, 'Game level: ' + gameLevel + ' Pollution lvl goal: ' + lvlGoal[gameLevel-1], {
+        fontFamily: 'Arial',
+        fontSize: '20px',
+        padding: { x: 10, y: 5 },
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        fill: '#ffffff'
+    });
     pollutionStatus.setScrollFactor(0);
     setInterval(getUpdatedPolutionValue, 1000);
+    setInterval(verifyLevelGoal, 1000);
     setInterval(spawnPoo, 1000);
 }
 
@@ -104,7 +122,7 @@ function update (time, delta)
             if (!trees.find(tree => tree.x === pointerTileX && tree.y === pointerTileY )) {
                 trees.push({x: pointerTileX, y: pointerTileY})
             }
-            map.fill(47, pointerTileX, pointerTileY, 1, 1);
+            map.fill(48, pointerTileX, pointerTileY, 1, 1);
         }
         // Fill the tiles within an area with sign posts (tile id = 46)
     }
