@@ -93,6 +93,9 @@ function update (time, delta)
     {
         var tile = map.getTileAtWorldXY(worldPoint.x, worldPoint.y);
         if (tile.index !== 47) {
+            if (!trees.find(tree => tree.x === pointerTileX && tree.y === pointerTileY )) {
+                trees.push({x: pointerTileX, y: pointerTileY})
+            }
             map.fill(48, pointerTileX, pointerTileY, 1, 1);
         }
         // Fill the tiles within an area with sign posts (tile id = 46)
