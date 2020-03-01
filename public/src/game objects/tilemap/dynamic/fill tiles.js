@@ -16,6 +16,24 @@ var game = new Phaser.Game(config);
 var controls;
 var marker;
 var map;
+var pollutionStatus;
+var pollutionValue = 0;
+var POLLUTION_TICKER = 1000
+
+var trees = []
+var poos = [1, 2, 3]
+
+function getUpdatedPolutionValue() {
+    // Get absorbed polution from trees
+    var treePolutionAbsorbed = trees.length;
+    // Get produced polution from poo
+    var pooPolutionProduced = poos.length;
+
+    var pollutionUpdate = pooPolutionProduced - treePolutionAbsorbed;
+
+    pollutionValue += pollutionUpdate
+    pollutionStatus.setText('Polution level: ' + pollutionValue);
+}
 
 function preload ()
 {
@@ -46,14 +64,15 @@ function create ()
     };
     controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
-    var help = this.add.text(16, 16, 'Left-click to fill the selected region.', {
+    pollutionStatus = this.add.text(16, 16, 'Polution level: ' + pollutionValue, {
         fontFamily: 'Arial',
         fontSize: '18px',
         padding: { x: 10, y: 5 },
         backgroundColor: '#000000',
         fill: '#ffffff'
     });
-    help.setScrollFactor(0);
+    pollutionStatus.setScrollFactor(0);
+    setInterval(getUpdatedPolutionValue, 1000);
 }
 
 function update (time, delta)
