@@ -21,7 +21,7 @@ var pollutionValue = 0;
 var POLLUTION_TICKER = 1000
 
 var trees = []
-var poos = [1, 2, 3]
+var poos = []
 
 function getUpdatedPolutionValue() {
     // Get absorbed polution from trees
@@ -33,6 +33,13 @@ function getUpdatedPolutionValue() {
 
     pollutionValue += pollutionUpdate
     pollutionStatus.setText('Polution level: ' + pollutionValue);
+}
+
+function spawnPoo() {
+    x = map.worldToTileX((Math.floor(Math.random()*800)));
+    y = map.worldToTileX((Math.floor(Math.random()*600)));
+    console.log(x, y);
+    map.fill(47, x, y, 1, 1);
 }
 
 function preload ()
@@ -73,6 +80,7 @@ function create ()
     });
     pollutionStatus.setScrollFactor(0);
     setInterval(getUpdatedPolutionValue, 1000);
+    setInterval(spawnPoo, 1000);
 }
 
 function update (time, delta)
@@ -96,7 +104,7 @@ function update (time, delta)
             if (!trees.find(tree => tree.x === pointerTileX && tree.y === pointerTileY )) {
                 trees.push({x: pointerTileX, y: pointerTileY})
             }
-            map.fill(48, pointerTileX, pointerTileY, 1, 1);
+            map.fill(47, pointerTileX, pointerTileY, 1, 1);
         }
         // Fill the tiles within an area with sign posts (tile id = 46)
     }
