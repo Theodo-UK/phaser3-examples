@@ -68,8 +68,8 @@ function create ()
         fontFamily: 'Arial',
         fontSize: '18px',
         padding: { x: 10, y: 5 },
-        backgroundColor: '#000000',
-        fill: '#ffffff'
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        fill: '#ff0000'
     });
     pollutionStatus.setScrollFactor(0);
     setInterval(getUpdatedPolutionValue, 1000);
