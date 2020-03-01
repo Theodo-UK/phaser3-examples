@@ -54,7 +54,7 @@ function updatePoo() {
     for (i = 0; i < poos.length; i++) {
         let timeElapsed = Date.now() - poos[i].time
         console.log(timeElapsed)
-        if (timeElapsed > 5000) {
+        if (timeElapsed > 1000 && map.getTileAt(poos[i].x, poos[i].y).index !== 38) {
             map.fill(47, poos[i].x, poos[i].y, 1, 1)
 }}}
 
@@ -152,6 +152,10 @@ function update (time, delta)
                 trees.push({x: pointerTileX, y: pointerTileY})
             }
             map.fill(48, pointerTileX, pointerTileY, 1, 1);
+        }
+
+        if (tile.index === 46) {
+            map.fill(38, pointerTileX, pointerTileY, 1, 1);
         }
         // Fill the tiles within an area with sign posts (tile id = 46)
     }
