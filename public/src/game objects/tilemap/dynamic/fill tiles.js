@@ -40,8 +40,11 @@ function getUpdatedPolutionValue() {
 function spawnPoo() {
     x = map.worldToTileX((Math.floor(Math.random()*800)));
     y = map.worldToTileX((Math.floor(Math.random()*600)));
-    console.log(x, y);
     map.fill(47, x, y, 1, 1);
+    poos.push({
+        x: x,
+        y: y
+    })
 }
 
 function verifyLevelGoal() {
