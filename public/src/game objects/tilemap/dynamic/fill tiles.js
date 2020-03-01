@@ -92,7 +92,7 @@ function update (time, delta)
     if (this.input.manager.activePointer.isDown)
     {
         var tile = map.getTileAtWorldXY(worldPoint.x, worldPoint.y);
-        if (tile.index !== 47) {
+        if (tile.index === 30) {
             if (!trees.find(tree => tree.x === pointerTileX && tree.y === pointerTileY )) {
                 trees.push({x: pointerTileX, y: pointerTileY})
             }
