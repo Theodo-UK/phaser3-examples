@@ -41,14 +41,23 @@ function spawnPoo() {
         x = map.worldToTileX((Math.floor(Math.random()*800)));
         y = map.worldToTileY((Math.floor(Math.random()*600)));
         var tile = map.getTileAt(x,y);
-        console.log(tile)
         if (tile.index === 30) {
-            map.fill(47, x, y, 1, 1);
+            map.fill(46, x, y, 1, 1);
             poos.push({
                 x: x,
-                y: y
+                y: y,
+                time: Date.now()
     })}
 }
+
+function updatePoo() {
+    for (i = 0; i < poos.length; i++) {
+        let timeElapsed = Date.now() - poos[i].time
+        console.log(timeElapsed)
+        if (timeElapsed > 5000) {
+            map.fill(47, poos[i].x, poos[i].y, 1, 1)
+}}}
+
 
 function verifyLevelGoal() {
     if (pollutionValue <= lvlGoal[gameLevel-1]) {
@@ -105,6 +114,7 @@ function create ()
     setInterval(getUpdatedPolutionValue, 1000);
     setInterval(verifyLevelGoal, 1000);
     setInterval(spawnPoo, 1000);
+    setInterval(updatePoo, 1000);
 }
 
 function update (time, delta)
