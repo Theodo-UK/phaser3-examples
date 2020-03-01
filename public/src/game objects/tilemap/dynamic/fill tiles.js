@@ -31,7 +31,7 @@ function create ()
 
     marker = this.add.graphics();
     marker.lineStyle(2, 0x000000, 1);
-    marker.strokeRect(0, 0, 6 * map.tileWidth, 6 * map.tileHeight);
+    marker.strokeRect(0, 0, map.tileWidth, map.tileHeight);
 
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
@@ -73,7 +73,7 @@ function update (time, delta)
     if (this.input.manager.activePointer.isDown)
     {
         // Fill the tiles within an area with sign posts (tile id = 46)
-        map.fill(46, pointerTileX, pointerTileY, 6, 6);
+        map.fill(46, pointerTileX, pointerTileY, 1, 1);
     }
 
 }
